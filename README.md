@@ -28,6 +28,28 @@
 
 ---
 
+## 🇨🇳 增强版特性 (Enhanced Chinese Edition)
+
+本分支在官方原版基础上，经过深度对抗性审查与第一性原理优化，带来以下关键升级：
+
+- **🏮 全界面深度中文本地化**：完整汉化全屏仪表盘、VS Code 侧边栏、底部状态栏、配额预警通知以及导出的 Markdown / CSV 报告。
+- **💰 官方多模型精准费率矩阵**：修复原版按单一平铺费率计价的严重失真。内置 Gemini 3.8/3.7/3.6/3.5/3.1 Pro、Claude Sonnet 4.6 与 Claude Opus 官方阶梯输入/输出/缓存费率，精确呈现上下文缓存（Context Cache）实际为您节省的美元金额。
+- **⚡ Windows 配额探测抗抖动与零 CPU 激增**：重构 `quota_detector.js`，引入内存 TTL 缓存与扫描防抖机制，杜绝高频唤起 Windows PowerShell 导致的 CPU 峰值。
+- **🕒 本地时区自动校准**：修复 24 小时全天候活跃分布图的 8 小时 UTC 时差，精准还原您在当地时间的真实编码节律。
+- **🌐 独立单文件网页与 Web 服务**：无需依赖 VS Code，直接通过 Python 即可使用：
+  ```bash
+  # 1. 终端直接查看分析概览
+  python collector.py
+
+  # 2. 导出单文件独立 HTML 网页报告（可离线随处在浏览器双击打开）
+  python collector.py --export-html my_report.html
+
+  # 3. 启动本地轻量 Web 服务
+  python collector.py --serve 9090
+  ```
+
+---
+
 ## ⚡ Overview
 
 Google Antigravity builds deep contextual abstractions, indexes multi-repo codebases, and executes autonomous tool loops. In active projects, pairing with frontier models pushes tens of millions of tokens daily across **Gemini 3.8 Flash**, **Gemini 3.7 Flash**, **Claude Sonnet 4.6**, and **Claude Opus 4.6**.

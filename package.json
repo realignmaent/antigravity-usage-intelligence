@@ -1,7 +1,7 @@
 {
   "name": "antigravity-usage-intelligence",
-  "displayName": "Antigravity Usage — Token Tracker & Quota Intelligence",
-  "description": "Antigravity usage tracker & live model quota monitor. Real-time Gemini & Claude token tracking, prompt cache savings, activity heatmaps & session analytics. 100% local & private.",
+  "displayName": "Antigravity 用量与配额智能监控 (Token Tracker & Quota Intelligence)",
+  "description": "Antigravity Token 用量分析与实时模型配额监控看板。精准支持 Gemini & Claude Token 统计、Prompt 缓存节省估算、24 小时活跃分布与会话明细。100% 本地运行与隐私安全。",
   "version": "1.0.7",
   "publisher": "nirbhay-hiwse",
   "author": {
@@ -91,17 +91,17 @@
   "main": "./extension.js",
   "contributes": {
     "configuration": {
-      "title": "Antigravity Usage Intelligence",
+      "title": "Antigravity 用量监控配置",
       "properties": {
         "antigravity-stats.showStatusBar": {
           "type": "boolean",
           "default": true,
-          "description": "Show today's token consumption badge in the bottom Status Bar."
+          "description": "在底部状态栏显示今日 Token 消耗角标。"
         },
         "antigravity-stats.autoRefreshMinutes": {
           "type": "number",
           "default": 3,
-          "description": "Auto-refresh frequency in minutes for token usage."
+          "description": "Token 用量自动刷新的时间间隔（分钟）。"
         },
         "antigravity-stats.defaultRange": {
           "type": "string",
@@ -115,27 +115,27 @@
             "180d",
             "all"
           ],
-          "description": "Default time range loaded on opening the analytics panel."
+          "description": "打开分析面板时默认加载的时间跨度。"
         },
         "antigravity-stats.pythonPath": {
           "type": "string",
           "default": "",
-          "description": "Explicit path to Python executable (e.g. C:\\\\Python311\\\\python.exe or /usr/bin/python3). Leave empty for auto-detection."
+          "description": "显式指定 Python 解释器路径（如 C:\\\\Python311\\\\python.exe 或 /usr/bin/python3）。留空则自动检测。"
         },
         "antigravity-stats.quotaAlerts": {
           "type": "boolean",
           "default": true,
-          "description": "Show a warning notification when live Antigravity quota crosses a threshold. Only fires on live server data, never on estimates."
+          "description": "当 Antigravity 实时配额达到警戒阈值时弹出警告通知（仅对官方实时配额生效）。"
         },
         "antigravity-stats.quotaAlertThresholds": {
           "type": "array",
           "default": [75, 90, 100],
-          "description": "Quota usage percentages that trigger a warning notification (per model family). Each level fires once until usage drops 5 points below it."
+          "description": "触发配额警告通知的使用率百分比阈值（按模型类别），当使用率下降 5% 后自动重新激活。"
         },
         "antigravity-stats.demoMode": {
           "type": "boolean",
           "default": false,
-          "description": "Show deterministic sample data instead of real databases (for screenshots, UI testing, first look). No real data is read while enabled."
+          "description": "演示模式：展示样本演示数据而非读取真实本地数据库（用于界面截图与功能预览）。"
         }
       }
     },
@@ -143,7 +143,7 @@
       "activitybar": [
         {
           "id": "antigravity-stats-container",
-          "title": "Agent Stats",
+          "title": "Agent 统计",
           "icon": "assets/icon.svg"
         }
       ]
@@ -153,29 +153,29 @@
         {
           "type": "webview",
           "id": "antigravity-stats-view",
-          "name": "Antigravity Stats"
+          "name": "Antigravity 用量统计"
         }
       ]
     },
     "commands": [
       {
         "command": "antigravity-stats.openDashboard",
-        "title": "Open Full Screen Dashboard",
+        "title": "打开全屏用量仪表盘",
         "icon": "$(dashboard)"
       },
       {
         "command": "antigravity-stats.refresh",
-        "title": "Refresh Stats",
+        "title": "刷新用量统计",
         "icon": "$(refresh)"
       },
       {
         "command": "antigravity-stats.rebuildCache",
-        "title": "Rebuild Full History Cache",
+        "title": "重建全量历史缓存",
         "icon": "$(database)"
       },
       {
         "command": "antigravity-stats.exportReport",
-        "title": "Export Token Usage Report (JSON)",
+        "title": "导出 Token 用量分析报告 (JSON)",
         "icon": "$(cloud-download)"
       }
     ],
@@ -201,12 +201,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nir-Bhay/antigravity-usage-intelligence.git"
+    "url": "https://github.com/realignmaent/antigravity-usage-intelligence.git"
   },
   "bugs": {
-    "url": "https://github.com/Nir-Bhay/antigravity-usage-intelligence/issues"
+    "url": "https://github.com/realignmaent/antigravity-usage-intelligence/issues"
   },
-  "homepage": "https://github.com/Nir-Bhay/antigravity-usage-intelligence#readme",
+  "homepage": "https://github.com/realignmaent/antigravity-usage-intelligence#readme",
   "scripts": {
     "test": "node -c extension.js && node -c src/quota_detector.js && (python3 -m py_compile collector.py || python -m py_compile collector.py || py -3 -m py_compile collector.py)",
     "vscode:prepublish": "npm run test",

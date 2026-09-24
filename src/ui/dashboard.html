@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antigravity Usage Intelligence</title>
+  <title>Antigravity 用量与配额智能监测</title>
   <style>
     :root {
       --bg-primary: var(--vscode-editor-background, #0f172a);
@@ -3322,44 +3322,44 @@
           <line x1="12" y1="20" x2="12" y2="4"></line>
           <line x1="6" y1="20" x2="6" y2="14"></line>
         </svg>
-        <h1>Antigravity Usage Intelligence</h1>
-        <span class="badge-live"><span class="pulse"></span> Live</span>
+        <h1>Antigravity 用量与配额智能监测</h1>
+        <span class="badge-live"><span class="pulse"></span> 实时监测</span>
       </div>
 
       <!-- Streaks & Consistency Tracker -->
       <div class="streaks-ribbon" id="streaks-ribbon">
         <span class="streaks-item" title="Current consecutive days coding with Antigravity">
-          🔥 <strong id="streak-current">-</strong> Streak
+          🔥 连续 <strong id="streak-current">-</strong> 天
         </span>
         <span class="streaks-divider">|</span>
         <span class="streaks-item" title="Longest active daily streak recorded">
-          🏆 <strong id="streak-best">-</strong> Best
+          🏆 最佳 <strong id="streak-best">-</strong> 天
         </span>
         <span class="streaks-divider">|</span>
         <span class="streaks-item" title="Total active coding days with agent">
-          📅 <strong id="streak-active">-</strong> Days
+          📅 活跃 <strong id="streak-active">-</strong> 天
         </span>
       </div>
     </div>
 
     <div class="actions">
       <button id="btn-open-full" class="primary" title="Open Dashboard in Full Tab">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg> <span class="btn-text">Full Tab</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg> <span class="btn-text">全屏大屏</span>
       </button>
       <button id="btn-copy-md" class="success" title="Copy clean Markdown summary for PR or Standup">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span class="btn-text">Markdown</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span class="btn-text">复制报告</span>
       </button>
       <button id="btn-refresh" title="Scan latest database updates">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> <span class="btn-text">Refresh</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> <span class="btn-text">刷新</span>
       </button>
       <button id="btn-rebuild" title="Rebuild cache from 140+ database files">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg> <span class="btn-text">Rebuild</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg> <span class="btn-text">重建缓存</span>
       </button>
       <button id="btn-export-csv" title="Export sessions as CSV">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> <span class="btn-text">CSV</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> <span class="btn-text">导出 CSV</span>
       </button>
-      <button id="btn-export" title="Export report as JSON">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> <span class="btn-text">JSON</span>
+      <button id="btn-export" title="导出为 JSON 报告">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> <span class="btn-text">导出 JSON</span>
       </button>
     </div>
   </div>
@@ -3368,19 +3368,19 @@
   <div id="error-banner">
     <div class="error-title">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Failed to load statistics
+      统计数据加载失败
     </div>
     <div id="error-message"></div>
-    <button id="btn-error-retry" class="primary" style="padding:3px 10px; font-size:11px;">Retry</button>
+    <button id="btn-error-retry" class="primary" style="padding:3px 10px; font-size:11px;">重试</button>
   </div>
 
   <!-- Time Range Filter Bar -->
   <div class="filter-bar">
-    <button class="filter-btn active" data-range="today">Today</button>
-    <button class="filter-btn" data-range="yesterday">Yesterday</button>
-    <button class="filter-btn" data-range="7d">Last 7 Days</button>
-    <button class="filter-btn" data-range="30d">Last 30 Days</button>
-    <button class="filter-btn" data-range="all">All Time</button>
+    <button class="filter-btn active" data-range="today">今日</button>
+    <button class="filter-btn" data-range="yesterday">昨日</button>
+    <button class="filter-btn" data-range="7d">近 7 天</button>
+    <button class="filter-btn" data-range="30d">近 30 天</button>
+    <button class="filter-btn" data-range="all">全部历史</button>
   </div>
 
   <!-- Compact & High-Density Model Quota Card -->
@@ -3391,10 +3391,10 @@
         <span class="quota-bolt-icon">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </span>
-        <span class="quota-heading">Model Quota</span>
+        <span class="quota-heading">模型配额水位</span>
         <span class="quota-status-badge" id="quota-status">Pro</span>
       </div>
-      <div class="quota-timer-wrap" title="Sliding window reset countdown">
+      <div class="quota-timer-wrap" title="滑动窗口重置倒计时">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span id="quota-timer-text">--:--</span>
       </div>
@@ -3410,7 +3410,7 @@
             <span class="quota-model-name" id="gemini-active-chip">Gemini 3.8 Flash</span>
           </div>
           <div class="quota-row-val safe" id="gemini-status-pill">
-            <span id="gemini-usage-val">0%</span> used
+            <span id="gemini-usage-val">0%</span> 已用
           </div>
         </div>
         <div class="quota-track">
@@ -3426,7 +3426,7 @@
             <span class="quota-model-name" id="claude-active-chip">Claude Sonnet 4.6</span>
           </div>
           <div class="quota-row-val safe" id="claude-status-pill">
-            <span id="claude-usage-val">0%</span> used
+            <span id="claude-usage-val">0%</span> 已用
           </div>
         </div>
         <div class="quota-track">
@@ -3445,9 +3445,9 @@
 
   <!-- Hero KPI Cards (Refined Glassmorphic 7-Card Balanced Grid) -->
   <div style="font-size:10px; color:var(--text-muted); margin:-4px 2px 8px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
-    <span id="data-freshness-note" title="Token counts come straight from Antigravity's local session databases">Tokens: exact local counts</span>
+    <span id="data-freshness-note" title="Token counts come straight from Antigravity's local session databases">Token 用量：本地精确计量</span>
     <span style="opacity:0.4;">·</span>
-    <span title="Quota bars estimate a rolling 5-hour window from local activity — not provider billing">Quota bars: local estimate, not a bill</span>
+    <span title="Quota bars estimate a rolling 5-hour window from local activity — not provider billing">配额条：本地滚动估算，非官方账单</span>
   </div>
   <div class="kpi-grid">
     <!-- Hero Card: Total Tokens (Spans 2 columns) -->
@@ -3455,88 +3455,88 @@
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Total Tokens
+          Token 总消耗量
         </div>
-        <span class="kpi-chip live">Cumulative</span>
+        <span class="kpi-chip live">累计处理</span>
       </div>
       <div class="kpi-value" id="val-total-tokens">-</div>
-      <div class="kpi-sub"><span id="val-total-turns">-</span> turns recorded across active window</div>
+      <div class="kpi-sub"><span id="val-total-turns">-</span> 轮对话记录</div>
     </div>
 
-    <!-- Card 2: Input (Prompt) -->
+    <!-- Card 2: 全新输入 (Prompt) -->
     <div class="kpi-card" id="card-input-tokens">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
-          Input (Prompt)
+          全新输入 (Prompt)
         </div>
       </div>
       <div class="kpi-value val-input" id="val-input-tokens">-</div>
-      <div class="kpi-sub">Non-cached context</div>
+      <div class="kpi-sub">非缓存上下文输入</div>
     </div>
 
-    <!-- Card 3: Output Tokens -->
+    <!-- Card 3: 模型输出 Tokens -->
     <div class="kpi-card" id="card-output-tokens">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
-          Output Tokens
+          模型输出 Tokens
         </div>
       </div>
       <div class="kpi-value val-output" id="val-output-tokens">-</div>
-      <div class="kpi-sub">Model generation</div>
+      <div class="kpi-sub">模型输出与深度思考</div>
     </div>
 
-    <!-- Card 4: Prompt Cache Hits -->
+    <!-- Card 4: 缓存读取 (Cache Read) -->
     <div class="kpi-card" id="card-cached-tokens">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Prompt Cache Hits
+          缓存读取 (Cache Read)
         </div>
         <span class="kpi-chip purple">Cache</span>
       </div>
       <div class="kpi-value val-cached" id="val-cached-tokens">-</div>
-      <div class="kpi-sub">Context cache hits</div>
+      <div class="kpi-sub">上下文缓存命中量</div>
     </div>
 
-    <!-- Card 5: Cache Efficiency -->
+    <!-- Card 5: 缓存命中率 -->
     <div class="kpi-card" id="card-cache-rate">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
-          Cache Efficiency
+          缓存命中率
         </div>
         <span class="kpi-chip mint">Hit Rate</span>
       </div>
       <div class="kpi-value val-cache-rate" id="val-cache-rate">-</div>
-      <div class="kpi-sub">Prompt cache hit rate</div>
+      <div class="kpi-sub">上下文复用节省比例</div>
     </div>
 
-    <!-- Card 6: Reasoning Tokens -->
+    <!-- Card 6: 深度思考 Tokens -->
     <div class="kpi-card" id="card-thinking-tokens">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
-          Reasoning Tokens
+          深度思考 Tokens
         </div>
         <span class="kpi-chip amber">Thinking</span>
       </div>
       <div class="kpi-value val-thinking" id="val-thinking-tokens">-</div>
-      <div class="kpi-sub">Thinking mode tokens</div>
+      <div class="kpi-sub">CoT 思考推理消耗</div>
     </div>
 
-    <!-- Card 7: Tool Requests -->
+    <!-- Card 7: 工具调用次数 -->
     <div class="kpi-card" id="card-tool-requests">
       <div class="kpi-card-header">
         <div class="kpi-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          Tool Requests
+          工具调用次数
         </div>
         <span class="kpi-chip rose">Actions</span>
       </div>
       <div class="kpi-value val-tool-calls" id="val-tool-calls">-</div>
-      <div class="kpi-sub" id="val-tool-sub">Agent tool executions</div>
+      <div class="kpi-sub" id="val-tool-sub">Agent 工具调用总数</div>
     </div>
   </div>
 
@@ -3545,7 +3545,7 @@
     <div class="chart-header">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-        Projects & Workspaces (Click to Filter)
+        项目与工作区分布 (点击筛选)
       </div>
       <span style="font-size:11px; color:var(--text-muted);" id="projects-count-label">0 detected</span>
     </div>
@@ -3557,7 +3557,7 @@
     </div>
     <div class="projects-expand-footer" id="projects-expand-wrap" style="display:none;">
       <button id="btn-toggle-projects" class="btn-collapse-toggle" type="button">
-        <span id="projects-toggle-text">Show More</span>
+        <span id="projects-toggle-text">展开更多</span>
         <svg id="projects-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform 0.2s ease;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
     </div>
@@ -3569,21 +3569,21 @@
       <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
         <div class="chart-title">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
-          <span>Daily Token Consumption Trend</span>
+          <span>每日 Token 消耗趋势</span>
         </div>
         <span class="daily-today-badge" id="daily-today-badge">📅 Today: Sep 6</span>
       </div>
       <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
         <div class="trend-toggle-group">
-          <button class="trend-toggle-btn active" id="btn-trend-30" type="button">Last 30 Days</button>
-          <button class="trend-toggle-btn" id="btn-trend-14" type="button">Last 14 Days</button>
-          <button class="trend-toggle-btn" id="btn-trend-all" type="button">All Time</button>
+          <button class="trend-toggle-btn active" id="btn-trend-30" type="button">近 30 天</button>
+          <button class="trend-toggle-btn" id="btn-trend-14" type="button">近 14 天</button>
+          <button class="trend-toggle-btn" id="btn-trend-all" type="button">全部历史</button>
         </div>
         <div class="legend">
-          <div class="legend-item"><div class="legend-color" style="background:#38bdf8;"></div> Input</div>
-          <div class="legend-item"><div class="legend-color" style="background:#a855f7;"></div> Cached</div>
-          <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div> Output</div>
-          <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> Thinking</div>
+          <div class="legend-item"><div class="legend-color" style="background:#38bdf8;"></div> 输入</div>
+          <div class="legend-item"><div class="legend-color" style="background:#a855f7;"></div> 缓存</div>
+          <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div> 输出</div>
+          <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> 思考</div>
         </div>
       </div>
     </div>
@@ -3592,7 +3592,7 @@
         <!-- Generated via JS -->
       </div>
       <button class="btn-jump-today" id="btn-jump-today" type="button" title="Jump to Today (Latest Date)" style="display:none;">
-        <span>Latest (Today)</span>
+        <span>跳转到今天</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
@@ -3603,7 +3603,7 @@
     <div class="chart-header">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Circadian Rhythm: 24-Hour Peak Coding Activity
+        24 小时活跃时段分布
       </div>
       <div class="peak-badge" id="hourly-highlight-label">
         <span>🔥</span> <span>Peak: 3:00 PM (30 sessions)</span>
@@ -3619,7 +3619,7 @@
     <div class="chart-header">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>Agent Activity Heatmap</span>
+        <span>Agent 活动热力图</span>
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         <div class="legend">
@@ -3643,7 +3643,7 @@
     <div class="chart-header" style="cursor:pointer;" id="models-card-header" title="Click to collapse / expand">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        <span>Model Intelligence & Reasoning Share</span>
+        <span>模型用量、推理与成本分布</span>
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         <button class="chart-collapse-toggle" id="toggle-models-card" title="Collapse / Expand">
@@ -3654,10 +3654,10 @@
     <div class="chart-collapsible-content" id="models-section-body">
       <div class="model-header-controls" style="margin-bottom:6px;">
         <select id="model-select" class="model-select" title="Switch between All Models overview or inspect a specific model">
-          <option value="__ALL__">⚡ All Models (Fleet Overview)</option>
+          <option value="__ALL__">⚡ 全部模型总览</option>
         </select>
         <div class="legend">
-          <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> Thinking</div>
+          <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> 思考</div>
           <div class="legend-item"><div class="legend-color" style="background:#22c55e;"></div> Text Output</div>
           <div class="legend-item"><div class="legend-color" style="background:#a855f7;"></div> Context Cache</div>
           <div class="legend-item"><div class="legend-color" style="background:#38bdf8;"></div> Fresh Input</div>
@@ -3674,34 +3674,34 @@
     <div class="table-controls">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Recorded Agent Sessions (Click any session to inspect)
+        近期 Agent 会话明细 (点击展开详情)
       </div>
-      <input type="text" id="session-search" class="search-input" placeholder="Search prompt, project, ID...">
+      <input type="text" id="session-search" class="search-input" placeholder="搜索提示词、项目名称、会话 ID...">
     </div>
 
     <!-- Quick Filter Pills -->
     <div class="quick-filters">
-      <span class="q-pill active" data-qfilter="all">All</span>
-      <span class="q-pill" data-qfilter="heavy">🔥 Heavy (>5M)</span>
-      <span class="q-pill" data-qfilter="fast">⚡ Fast (<1m)</span>
-      <span class="q-pill" data-qfilter="deep">⏱️ Deep (>10 turns)</span>
-      <span class="q-pill" data-qfilter="errors">⚠️ Has Retries</span>
+      <span class="q-pill active" data-qfilter="all">全部</span>
+      <span class="q-pill" data-qfilter="heavy">🔥 重度消耗 (>5M)</span>
+      <span class="q-pill" data-qfilter="fast">⚡ 快速会话 (<1m)</span>
+      <span class="q-pill" data-qfilter="deep">⏱️ 深度对话 (>10轮)</span>
+      <span class="q-pill" data-qfilter="errors">⚠️ 包含重试/错误</span>
     </div>
 
     <div style="overflow-x:auto;">
       <table class="data-table" id="sessions-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Project</th>
-            <th>Task / Prompt</th>
-            <th class="col-hide-narrow">Model</th>
-            <th class="col-hide-narrow">Turns</th>
-            <th class="col-hide-narrow">Duration</th>
-            <th class="col-hide-narrow">Input</th>
-            <th class="col-hide-narrow">Cache Read</th>
-            <th class="col-hide-narrow">Output</th>
-            <th>Total Tokens</th>
+            <th>日期</th>
+            <th>项目</th>
+            <th>任务与提示词</th>
+            <th class="col-hide-narrow">模型</th>
+            <th class="col-hide-narrow">轮次</th>
+            <th class="col-hide-narrow">耗时</th>
+            <th class="col-hide-narrow">输入</th>
+            <th class="col-hide-narrow">缓存读取</th>
+            <th class="col-hide-narrow">输出</th>
+            <th>总 Tokens</th>
           </tr>
         </thead>
         <tbody id="sessions-table-body">
@@ -3711,7 +3711,7 @@
     </div>
     <div class="table-expand-footer" id="sessions-expand-wrap" style="display:none;">
       <button id="btn-toggle-sessions" class="btn-collapse-toggle" type="button">
-        <span id="sessions-toggle-text">Show All Sessions</span>
+        <span id="sessions-toggle-text">查看全部会话</span>
         <svg id="sessions-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform 0.2s ease;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <span id="sessions-count-hint" style="font-size:11px; color:var(--text-muted); margin-left:10px;"></span>
@@ -3723,7 +3723,7 @@
     <div class="chart-header">
       <div class="chart-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-        Most Used Tools in Selected Range
+        高频 Agent 工具调用分析
       </div>
     </div>
     <div id="tools-container" style="display:flex; flex-wrap:wrap; gap:8px;">
@@ -3742,11 +3742,11 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
             General
           </span>
-          <span class="quota-status-badge" style="font-size:9px; padding:1px 6px;" id="d-status-badge">Recorded Session</span>
+          <span class="quota-status-badge" style="font-size:9px; padding:1px 6px;" id="d-status-badge">历史会话</span>
         </div>
-        <h2 class="drawer-title" id="d-title">Session Details</h2>
+        <h2 class="drawer-title" id="d-title">会话深度分析</h2>
       </div>
-      <button class="drawer-close" id="drawer-close" title="Close Drawer">&times;</button>
+      <button class="drawer-close" id="drawer-close" title="关闭抽屉">&times;</button>
     </div>
 
     <!-- Metadata 4-Tile Grid -->
@@ -3754,7 +3754,7 @@
       <div class="drawer-spec-tile">
         <span class="drawer-spec-lbl">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z"/></svg>
-          Active Model
+          调用的模型
         </span>
         <span class="drawer-model-pill" id="d-model">Gemini 3.8 Flash</span>
       </div>
@@ -3762,7 +3762,7 @@
       <div class="drawer-spec-tile">
         <span class="drawer-spec-lbl">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Session Duration
+          会话总耗时
         </span>
         <span class="drawer-spec-val" id="d-duration">0s</span>
       </div>
@@ -3770,7 +3770,7 @@
       <div class="drawer-spec-tile">
         <span class="drawer-spec-lbl">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Timestamp
+          记录时间
         </span>
         <span class="drawer-spec-val" id="d-created" style="font-size:11.5px; font-weight:500;">-</span>
       </div>
@@ -3778,7 +3778,7 @@
       <div class="drawer-spec-tile">
         <span class="drawer-spec-lbl">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Agent Turns
+          交互轮次
         </span>
         <span class="drawer-spec-val" id="d-turns">0</span>
       </div>
@@ -3789,13 +3789,13 @@
       <div class="drawer-section-header">
         <span class="drawer-section-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Token Consumption & Cache
+          Token 消耗与缓存分析
         </span>
-        <span class="kpi-chip mint" id="d-cache-eff-chip">0% Cached</span>
+        <span class="kpi-chip mint" id="d-cache-eff-chip">0% 已缓存</span>
       </div>
 
       <!-- Proportional Distribution Bar -->
-      <div class="drawer-bar-wrap" title="Token Composition">
+      <div class="drawer-bar-wrap" title="Token 构成分布">
         <div class="drawer-bar-seg d-seg-cached" id="d-bar-cached" style="width: 0%;"></div>
         <div class="drawer-bar-seg d-seg-input" id="d-bar-input" style="width: 0%;"></div>
         <div class="drawer-bar-seg d-seg-thinking" id="d-bar-thinking" style="width: 0%;"></div>
@@ -3807,7 +3807,7 @@
         <div class="drawer-token-row">
           <span class="drawer-token-label">
             <span class="drawer-token-dot" style="background:#a855f7;"></span>
-            <span>Context Cache Read</span>
+            <span>上下文缓存读取 (Cache Read)</span>
           </span>
           <div class="drawer-token-vals">
             <span class="drawer-token-pct" id="d-cached-pct">0%</span>
@@ -3818,7 +3818,7 @@
         <div class="drawer-token-row">
           <span class="drawer-token-label">
             <span class="drawer-token-dot" style="background:#38bdf8;"></span>
-            <span>Non-cached Input</span>
+            <span>全新上下文输入 (Prompt)</span>
           </span>
           <div class="drawer-token-vals">
             <span class="drawer-token-pct" id="d-input-pct">0%</span>
@@ -3829,7 +3829,7 @@
         <div class="drawer-token-row">
           <span class="drawer-token-label">
             <span class="drawer-token-dot" style="background:#f59e0b;"></span>
-            <span>Thinking Mode</span>
+            <span>深度思考模式 (Thinking)</span>
           </span>
           <div class="drawer-token-vals">
             <span class="drawer-token-pct" id="d-thinking-pct">0%</span>
@@ -3840,7 +3840,7 @@
         <div class="drawer-token-row">
           <span class="drawer-token-label">
             <span class="drawer-token-dot" style="background:#22c55e;"></span>
-            <span>Generation Output</span>
+            <span>模型生成输出 (Output)</span>
           </span>
           <div class="drawer-token-vals">
             <span class="drawer-token-pct" id="d-output-pct">0%</span>
@@ -3849,7 +3849,7 @@
         </div>
 
         <div class="drawer-token-total-row">
-          <span class="drawer-token-total-lbl">Total Processed:</span>
+          <span class="drawer-token-total-lbl">总计处理 Tokens:</span>
           <span class="drawer-token-total-val" id="d-total">0</span>
         </div>
       </div>
@@ -3860,12 +3860,12 @@
       <div class="drawer-section-header">
         <span class="drawer-section-title">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          Tools Executed in Session
+          会话内执行的工具调用
         </span>
-        <span class="kpi-chip rose" id="d-tools-badge">0 calls</span>
+        <span class="kpi-chip rose" id="d-tools-badge">0 次调用</span>
       </div>
       <div class="drawer-tools-container" id="d-tools">
-        <span style="color:var(--text-muted); font-size:11px;">No tools recorded</span>
+        <span style="color:var(--text-muted); font-size:11px;">未记录到工具调用</span>
       </div>
     </div>
 
@@ -3874,8 +3874,8 @@
       <div class="drawer-dev-item">
         <div class="drawer-dev-lbl">
           <span>Conversation ID</span>
-          <button class="drawer-btn-inline-copy" id="d-btn-copy-id-inline" title="Copy conversation ID">
-            📋 Copy
+          <button class="drawer-btn-inline-copy" id="d-btn-copy-id-inline" title="复制会话 ID">
+            📋 复制
           </button>
         </div>
         <div class="mono" id="d-convoid" style="word-break:break-all; color:#38bdf8; font-size:11px; margin-top:2px;">-</div>
@@ -3883,7 +3883,7 @@
 
       <div class="drawer-dev-item" style="border-top:1px solid rgba(255,255,255,0.06); padding-top:6px;">
         <div class="drawer-dev-lbl">
-          <span>Workspace Path</span>
+          <span>工作区路径</span>
         </div>
         <div class="mono" id="d-path" style="word-break:break-all; color:#94a3b8; font-size:10.5px; margin-top:2px;">-</div>
       </div>
@@ -3893,11 +3893,11 @@
     <div class="drawer-actions-row">
       <button class="drawer-btn-secondary" id="d-btn-copy-id">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Copy Session ID
+        复制会话 ID
       </button>
       <button class="drawer-btn-primary" id="d-btn-copy-md">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        Copy Markdown Report
+        复制 Markdown 报告
       </button>
     </div>
   </div>
@@ -3905,12 +3905,12 @@
   <!-- Loading Overlay -->
   <div class="loading-overlay" id="loading">
     <div class="spinner"></div>
-    <div style="font-size:12px; color:#94a3b8;">Scanning Antigravity Databases...</div>
+    <div style="font-size:12px; color:#94a3b8;">正在扫描 Antigravity 本地数据库...</div>
   </div>
 
   <!-- Toast Notification -->
   <div class="toast-popup" id="toast-popup">
-    <span>✓</span> <span id="toast-text">Copied to clipboard!</span>
+    <span>✓</span> <span id="toast-text">已复制到剪贴板！</span>
   </div>
 
   <!-- Shared Floating Tooltip (Never Clipped) -->
@@ -4075,7 +4075,7 @@
       } else {
         grid.classList.remove('collapsed');
         if (overlay) overlay.style.display = 'none';
-        if (toggleText) toggleText.textContent = 'Show Less';
+        if (toggleText) toggleText.textContent = '收起';
         if (toggleIcon) toggleIcon.style.transform = 'rotate(180deg)';
       }
     }
@@ -4178,7 +4178,7 @@
 
       const allPill = document.createElement('div');
       allPill.className = 'project-pill' + (activeProjectFilter === null ? ' active' : '');
-      allPill.innerHTML = `<span>All Projects</span> <span class="tokens">(${data.projects.length})</span>`;
+      allPill.innerHTML = `<span>全部项目</span> <span class="tokens">(${data.projects.length})</span>`;
       allPill.addEventListener('click', () => {
         activeProjectFilter = null;
         renderProjects();
@@ -4363,10 +4363,10 @@
         setupBarTooltip(gemCard, () => `
           <div style="font-weight:700; color:#38bdf8; margin-bottom:3px; font-size:11.5px;">✦ Gemini Fleet (Local Estimate)</div>
           <div style="font-size:11px; color:#f1f5f9; margin-bottom:2px;">
-            5h Window: <strong>${formatNumber(gem.tokens || 0)}</strong> / ${formatNumber(gem.limit_tokens || 100000000)} (${gemPct}%)
+            5小时滑动窗口: <strong>${formatNumber(gem.tokens || 0)}</strong> / ${formatNumber(gem.limit_tokens || 100000000)} (${gemPct}%)
           </div>
           <div style="font-size:10px; color:var(--text-muted);">
-            Active Model: <span style="color:#fbbf24;">${escapeHtml(gem.active_model)}</span> · ${(gem.turns || 0).toLocaleString()} turns
+            活跃模型: <span style="color:#fbbf24;">${escapeHtml(gem.active_model)}</span> · ${(gem.turns || 0).toLocaleString()} 轮交互
           </div>
         `);
       }
@@ -4386,10 +4386,10 @@
         setupBarTooltip(cldCard, () => `
           <div style="font-weight:700; color:#c084fc; margin-bottom:3px; font-size:11.5px;">● Claude Fleet (Local Estimate)</div>
           <div style="font-size:11px; color:#f1f5f9; margin-bottom:2px;">
-            5h Window: <strong>${formatNumber(cld.tokens || 0)}</strong> / ${formatNumber(cld.limit_tokens || 15000000)} (${cldPct}%)
+            5小时滑动窗口: <strong>${formatNumber(cld.tokens || 0)}</strong> / ${formatNumber(cld.limit_tokens || 15000000)} (${cldPct}%)
           </div>
           <div style="font-size:10px; color:var(--text-muted);">
-            Active Model: <span style="color:#c084fc;">${escapeHtml(cld.active_model)}</span> · ${(cld.turns || 0).toLocaleString()} turns
+            活跃模型: <span style="color:#c084fc;">${escapeHtml(cld.active_model)}</span> · ${(cld.turns || 0).toLocaleString()} 轮交互
           </div>
         `);
       }
@@ -4629,11 +4629,11 @@
             ${isPeak ? '🔥 ' : '🕒 '}${formatHourRange(h.hour)}
           </div>
           <div style="font-size:11px; color:#f1f5f9; margin-bottom:3px;">
-            Sessions: <strong>${h.sessions}</strong> ${isPeak ? '<span style="color:#fbbf24; font-size:10px; font-weight:700;">(Peak Activity)</span>' : ''}
+            会话数: <strong>${h.sessions}</strong> ${isPeak ? '<span style="color:#fbbf24; font-size:10px; font-weight:700;">(峰值活跃)</span>' : ''}
           </div>
           <div style="font-size:10px; color:#cbd5e1; display:flex; justify-content:space-between; gap:12px;">
-            <span>Agent Turns: <strong class="mono" style="color:#fff;">${h.turns}</strong></span>
-            <span>Tokens: <strong class="mono" style="color:#38bdf8;">${formatNumber(h.tokens)}</strong></span>
+            <span>交互轮次: <strong class="mono" style="color:#fff;">${h.turns}</strong></span>
+            <span>消耗 Tokens: <strong class="mono" style="color:#38bdf8;">${formatNumber(h.tokens)}</strong></span>
           </div>
         `);
 
@@ -4644,9 +4644,9 @@
       const badgeEl = document.getElementById('hourly-highlight-label');
       if (badgeEl) {
         if (peakCount > 0) {
-          badgeEl.innerHTML = `<span>🔥</span> <span>Peak: ${peakStr} (${peakCount} sessions)</span>`;
+          badgeEl.innerHTML = `<span>🔥</span> <span>活跃峰值: ${peakStr} (${peakCount} 次会话)</span>`;
         } else {
-          badgeEl.innerHTML = `<span>No hourly activity yet</span>`;
+          badgeEl.innerHTML = `<span>暂无分时活跃数据</span>`;
         }
       }
     }
@@ -4658,8 +4658,8 @@
       container.innerHTML = '';
 
       if (!modelsList || modelsList.length === 0) {
-        container.innerHTML = '<div style="color:var(--text-muted); font-size:11px; padding:10px;">No model usage data recorded in selected range.</div>';
-        if (select) select.innerHTML = '<option value="__ALL__">No Models</option>';
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:11px; padding:10px;">选定时间范围内无模型用量记录。</div>';
+        if (select) select.innerHTML = '<option value="__ALL__">暂无模型</option>';
         return;
       }
 
@@ -4670,7 +4670,7 @@
 
       // Update dropdown options
       if (select) {
-        select.innerHTML = '<option value="__ALL__">⚡ All Models (Fleet Overview)</option>';
+        select.innerHTML = '<option value="__ALL__">⚡ 全部模型总览</option>';
         modelsList.forEach(m => {
           const opt = document.createElement('option');
           opt.value = m.name;
@@ -4707,9 +4707,9 @@
         outputTokens = modelsList.reduce((acc, m) => acc + (m.output || 0), 0);
         thinkingTokens = modelsList.reduce((acc, m) => acc + (m.thinking || 0), 0);
         totalSessions = modelsList.reduce((acc, m) => acc + (m.sessions || 0), 0);
-        title = '⚡ Fleet Reasoning & Intelligence Share';
-        shareLabel = `${modelsList.length} Active Models`;
-        sessionsLabel = `${totalSessions} sessions`;
+        title = '⚡ 全模型推理与智能占比分析';
+        shareLabel = `${modelsList.length} 个活跃模型`;
+        sessionsLabel = `${totalSessions} 次会话`;
       } else if (targetModel) {
         totalTokens = targetModel.total || 0;
         cachedTokens = targetModel.cached || 0;
@@ -4718,8 +4718,8 @@
         thinkingTokens = targetModel.thinking || 0;
         totalSessions = targetModel.sessions || 0;
         title = `✨ ${targetModel.name}`;
-        shareLabel = `${targetModel.share_pct}% Fleet Share`;
-        sessionsLabel = `${totalSessions} session${totalSessions === 1 ? '' : 's'}`;
+        shareLabel = `${targetModel.share_pct}% 占比`;
+        sessionsLabel = `${totalSessions} 次会话`;
       }
 
       const pureOutput = Math.max(0, outputTokens - thinkingTokens);
@@ -4742,43 +4742,43 @@
             <span>${escapeHtml(title)}</span>
             <span class="model-tag-sessions">${escapeHtml(sessionsLabel)}</span>
             <span class="model-tag-share">${escapeHtml(shareLabel)}</span>
-            ${!isAll ? `<button class="btn-filter-model-sessions" id="btn-filter-model" title="Filter sessions table below for this model">🔍 Filter Sessions</button>` : ''}
+            ${!isAll ? `<button class="btn-filter-model-sessions" id="btn-filter-model" title="在下方会话表格中筛选该模型">🔍 筛选该模型会话</button>` : ''}
           </div>
-          <div class="model-active-tokens">${formatNumber(totalTokens)} <span style="font-size:10px; color:var(--text-muted); font-weight:normal;">tokens</span></div>
+          <div class="model-active-tokens">${formatNumber(totalTokens)} <span style="font-size:10px; color:var(--text-muted); font-weight:normal;">Tokens</span></div>
         </div>
 
         <div class="model-bar-wrap" id="model-bar-wrap">
-          <div class="model-bar-segment model-bar-thinking" style="width:${thinkPct}%;" data-tip="Thinking Mode: ${formatNumber(thinkingTokens)} (${thinkPct.toFixed(1)}%)"></div>
-          <div class="model-bar-segment model-bar-output" style="width:${outPct}%;" data-tip="Text Output: ${formatNumber(pureOutput)} (${outPct.toFixed(1)}%)"></div>
-          <div class="model-bar-segment model-bar-cached" style="width:${cachedPct}%;" data-tip="Context Cache: ${formatNumber(cachedTokens)} (${cachedPct.toFixed(1)}%)"></div>
-          <div class="model-bar-segment model-bar-input" style="width:${inPct}%;" data-tip="Fresh Input: ${formatNumber(inputTokens)} (${inPct.toFixed(1)}%)"></div>
+          <div class="model-bar-segment model-bar-thinking" style="width:${thinkPct}%;" data-tip="深度思考模式: ${formatNumber(thinkingTokens)} (${thinkPct.toFixed(1)}%)"></div>
+          <div class="model-bar-segment model-bar-output" style="width:${outPct}%;" data-tip="模型生成输出: ${formatNumber(pureOutput)} (${outPct.toFixed(1)}%)"></div>
+          <div class="model-bar-segment model-bar-cached" style="width:${cachedPct}%;" data-tip="上下文缓存: ${formatNumber(cachedTokens)} (${cachedPct.toFixed(1)}%)"></div>
+          <div class="model-bar-segment model-bar-input" style="width:${inPct}%;" data-tip="全新上下文输入: ${formatNumber(inputTokens)} (${inPct.toFixed(1)}%)"></div>
         </div>
 
         <div class="model-metrics-grid">
-          <div class="model-metric-tile" title="Thinking / Reasoning: ${formatNumber(thinkingTokens)} (${thinkShareOfOutput}% of generation)">
+          <div class="model-metric-tile" title="深度思考推理: ${formatNumber(thinkingTokens)} (占输出 ${thinkShareOfOutput}%)">
             <div class="model-metric-tile-header">
-              <span style="color:#f59e0b;">●</span> Thinking
+              <span style="color:#f59e0b;">●</span> 思考推理
             </div>
             <div class="model-metric-tile-val" style="color:#fbbf24;">${formatNumber(thinkingTokens)}</div>
           </div>
 
-          <div class="model-metric-tile" title="Context Cache: ${formatNumber(cachedTokens)} (${cacheEfficiency}% cache ratio)">
+          <div class="model-metric-tile" title="上下文缓存读取: ${formatNumber(cachedTokens)} (缓存比率 ${cacheEfficiency}%)">
             <div class="model-metric-tile-header">
-              <span style="color:#a855f7;">●</span> Cache Read
+              <span style="color:#a855f7;">●</span> 缓存读取
             </div>
             <div class="model-metric-tile-val" style="color:#c084fc;">${formatNumber(cachedTokens)}</div>
           </div>
 
-          <div class="model-metric-tile" title="Text Generation: ${formatNumber(pureOutput)} (Standard output)">
+          <div class="model-metric-tile" title="文本生成输出: ${formatNumber(pureOutput)} (标准模型生成)">
             <div class="model-metric-tile-header">
-              <span style="color:#22c55e;">●</span> Text Output
+              <span style="color:#22c55e;">●</span> 文本生成
             </div>
             <div class="model-metric-tile-val" style="color:#4ade80;">${formatNumber(pureOutput)}</div>
           </div>
 
-          <div class="model-metric-tile" title="Fresh Input: ${formatNumber(inputTokens)} (Uncached prompts)">
+          <div class="model-metric-tile" title="全新上下文输入: ${formatNumber(inputTokens)} (未命中缓存的全新提示词)">
             <div class="model-metric-tile-header">
-              <span style="color:#38bdf8;">●</span> Fresh Input
+              <span style="color:#38bdf8;">●</span> 全新输入
             </div>
             <div class="model-metric-tile-val" style="color:#7dd3fc;">${formatNumber(inputTokens)}</div>
           </div>
@@ -4801,7 +4801,7 @@
           if (searchInput) {
             searchInput.value = targetModel.name;
             renderSessionsTable();
-            showToast(`Filtering sessions for "${targetModel.name}"`);
+            showToast(`已筛选模型: "${targetModel.name}"`);
             const tableEl = document.querySelector('.table-controls');
             if (tableEl) tableEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
@@ -5006,26 +5006,26 @@
             cell.className = `github-cell ${heatLvl}` + (isToday ? ' is-today' : '');
 
             setupBarTooltip(cell, () => `
-              <div style="font-weight:700; color:#38bdf8; margin-bottom:4px; font-size:12px;">📅 ${escapeHtml(formatDateFull(dateStr))}${isToday ? ' <span style="color:#fbbf24; font-size:10px;">(Today)</span>' : ''}</div>
+              <div style="font-weight:700; color:#38bdf8; margin-bottom:4px; font-size:12px;">📅 ${escapeHtml(formatDateFull(dateStr))}${isToday ? ' <span style="color:#fbbf24; font-size:10px;">(今日)</span>' : ''}</div>
               ${total > 0 ? `
-                <div style="color:#f8fafc; font-weight:600; margin-bottom:4px;">Total Tokens: ${formatNumber(total)}</div>
+                <div style="color:#f8fafc; font-weight:600; margin-bottom:4px;">处理总 Tokens: ${formatNumber(total)}</div>
                 <div style="font-size:10px; color:#cbd5e1; display:grid; grid-template-columns:auto auto; gap:2px 10px;">
-                  <span>Cached:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.cached || 0)}</span>
-                  <span>Thinking:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.thinking || 0)}</span>
-                  <span>Output:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.output || 0)}</span>
+                  <span>缓存读取:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.cached || 0)}</span>
+                  <span>思考推理:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.thinking || 0)}</span>
+                  <span>模型输出:</span> <span class="mono" style="text-align:right;">${formatNumber(rec.output || 0)}</span>
                 </div>
                 <div style="font-size:10px; color:var(--text-muted); margin-top:4px; border-top:1px solid rgba(255,255,255,0.08); padding-top:4px;">
-                  ⚡ ${rec.turns || 0} turns in ${rec.sessions || 1} session${(rec.sessions || 1) === 1 ? '' : 's'}
+                  ⚡ ${rec.turns || 0} 轮交互 (${rec.sessions || 1} 次会话)
                 </div>
               ` : `
-                <div style="color:var(--text-muted); font-size:11px;">No agent activity on this day.</div>
+                <div style="color:var(--text-muted); font-size:11px;">该日暂无 Agent 活跃记录。</div>
               `}
             `);
 
             cell.addEventListener('click', () => {
               document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
               sendRangeRequestCustom(dateStr, dateStr);
-              showToast(`Filtered to ${formatDateShort(dateStr)}`);
+              showToast(`已筛选至 ${formatDateShort(dateStr)}`);
             });
           }
 
@@ -5050,27 +5050,27 @@
 
       const monthsCount = Math.round(numWeeks / 4.33);
       summaryBar.innerHTML = `
-        <div class="heat-summary-item" title="${daysActive} active coding days out of ${totalDaysPast} days in the last ${monthsCount} months">
+        <div class="heat-summary-item" title="过去 ${monthsCount} 个月中，共 ${totalDaysPast} 天，活跃编码 ${daysActive} 天">
           <span class="heat-summary-dot" style="background:#22c55e;"></span>
-          <span class="heat-summary-label">Active:</span>
-          <span class="heat-summary-val"><strong>${daysActive}</strong> days <span style="color:var(--text-muted); font-size:10px;">(${consistencyPct}%)</span></span>
+          <span class="heat-summary-label">活跃天数:</span>
+          <span class="heat-summary-val"><strong>${daysActive}</strong> 天 <span style="color:var(--text-muted); font-size:10px;">(${consistencyPct}%)</span></span>
         </div>
 
         <div class="heat-summary-divider">·</div>
 
-        <div class="heat-summary-item" title="Peak activity: ${peakDay ? formatNumber(peakDay.total) + ' tokens in ' + peakDay.turns + ' turns' : 'None'}">
+        <div class="heat-summary-item" title="活动峰值日: ${peakDay ? formatNumber(peakDay.total) + ' Tokens，' + peakDay.turns + ' 轮交互' : '无'}">
           <span style="font-size:11px;">🔥</span>
-          <span class="heat-summary-label">Peak:</span>
-          <span class="heat-summary-val" style="color:#fbbf24;"><strong>${peakDay ? formatDateShort(peakDay.date) : 'None'}</strong></span>
+          <span class="heat-summary-label">峰值日:</span>
+          <span class="heat-summary-val" style="color:#fbbf24;"><strong>${peakDay ? formatDateShort(peakDay.date) : '无'}</strong></span>
           ${peakDay ? `<span style="color:var(--text-muted); font-size:10px; font-family:monospace;">(${formatNumber(peakDay.total)})</span>` : ''}
         </div>
 
         ${currentStreak > 0 ? `
           <div class="heat-summary-divider">·</div>
-          <div class="heat-summary-item" title="Current consecutive days coding streak">
+          <div class="heat-summary-item" title="当前连续活跃编码天数">
             <span style="font-size:11px;">⚡</span>
-            <span class="heat-summary-label">Streak:</span>
-            <span class="heat-summary-val" style="color:#38bdf8;"><strong>${currentStreak}</strong>d</span>
+            <span class="heat-summary-label">连续活跃:</span>
+            <span class="heat-summary-val" style="color:#38bdf8;"><strong>${currentStreak}</strong>天</span>
           </div>
         ` : ''}
       `;
@@ -5082,7 +5082,7 @@
       actionRow.innerHTML = `
         <button class="btn-heatmap-action" id="btn-heat-filter-all" title="View all historical sessions across the entire dashboard">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>Filter Dashboard to All History</span>
+          <span>筛选仪表盘为全量历史</span>
         </button>
       `;
       const btnFilterAll = actionRow.querySelector('#btn-heat-filter-all');
@@ -5091,7 +5091,7 @@
           b.classList.toggle('active', b.getAttribute('data-range') === 'all');
         });
         sendRangeRequest('all');
-        showToast('Dashboard filtered to All History');
+        showToast('仪表盘已切换至全量历史');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
       container.appendChild(actionRow);
@@ -5137,7 +5137,7 @@
       const countHint = document.getElementById('sessions-count-hint');
 
       if (sessions.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color:var(--text-muted); padding:16px;">No sessions found matching filters.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color:var(--text-muted); padding:16px;">未找到符合当前筛选条件的会话。</td></tr>';
         if (expandWrap) expandWrap.style.display = 'none';
         return;
       }
@@ -5156,10 +5156,10 @@
             <span class="surface-badge surface-${(s.surface || 'ide').toLowerCase()}">${escapeHtml(s.surface || 'IDE')}</span>
             <span class="mono project-tag">${escapeHtml(s.project || 'General')}</span>
           </td>
-          <td class="session-title-cell" title="${escapeHtml(s.title || 'Session ' + shortId)}">
-            ${s.is_active ? '<span class="badge-active-live"><span class="pulse"></span> Active</span>' : (s.is_recent ? '<span class="badge-recent">Recent</span>' : '')}
-            ${escapeHtml(s.title || 'Agent Session')}
-            <button class="btn-copy" data-id="${escapeHtml(s.convo_id)}" title="Copy Conversation ID">📋</button>
+          <td class="session-title-cell" title="${escapeHtml(s.title || '会话 ' + shortId)}">
+            ${s.is_active ? '<span class="badge-active-live"><span class="pulse"></span> 进行中</span>' : (s.is_recent ? '<span class="badge-recent">最近</span>' : '')}
+            ${escapeHtml(s.title || 'Agent 会话')}
+            <button class="btn-copy" data-id="${escapeHtml(s.convo_id)}" title="复制会话 ID">📋</button>
           </td>
           <td class="col-hide-narrow" style="color:var(--text-muted); font-size:11px;">${escapeHtml(s.model)}</td>
           <td class="col-hide-narrow mono">${s.turn_count}</td>
@@ -5167,7 +5167,7 @@
           <td class="col-hide-narrow mono table-cell-input">${formatNumber(s.input_tokens)}</td>
           <td class="col-hide-narrow mono table-cell-cached">${formatNumber(s.cached_tokens)}</td>
           <td class="col-hide-narrow mono table-cell-output">${formatNumber(s.output_tokens)}</td>
-          <td class="mono" style="font-weight:600; color:var(--accent-blue);" title="Exact total tokens">${formatNumber(s.total_tokens)}</td>
+          <td class="mono" style="font-weight:600; color:var(--accent-blue);" title="总 Tokens 消耗">${formatNumber(s.total_tokens)}</td>
         `;
 
         tr.addEventListener('click', (e) => {
@@ -5182,7 +5182,7 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = btn.getAttribute('data-id');
-          copyText(id, 'Conversation ID copied!');
+          copyText(id, '会话 ID 已复制到剪贴板！');
           btn.textContent = '✓';
           setTimeout(() => { btn.textContent = '📋'; }, 1500);
         });
@@ -5195,13 +5195,13 @@
         } else {
           expandWrap.style.display = 'flex';
           if (isSessionsExpanded) {
-            if (toggleText) toggleText.textContent = `Show Less (Top ${DEFAULT_SESSION_ROWS})`;
+            if (toggleText) toggleText.textContent = `收起 (显示前 ${DEFAULT_SESSION_ROWS} 条)`;
             if (toggleIcon) toggleIcon.style.transform = 'rotate(180deg)';
-            if (countHint) countHint.textContent = `Showing all ${totalCount} sessions`;
+            if (countHint) countHint.textContent = `正在显示全部 ${totalCount} 条会话`;
           } else {
-            if (toggleText) toggleText.textContent = `Show All (${totalCount}) Sessions`;
+            if (toggleText) toggleText.textContent = `展开全部 (${totalCount}) 条会话`;
             if (toggleIcon) toggleIcon.style.transform = 'rotate(0deg)';
-            if (countHint) countHint.textContent = `Showing ${Math.min(DEFAULT_SESSION_ROWS, totalCount)} of ${totalCount}`;
+            if (countHint) countHint.textContent = `正在显示 ${Math.min(DEFAULT_SESSION_ROWS, totalCount)} / ${totalCount} 条`;
           }
         }
       }
@@ -5267,10 +5267,10 @@
       if (barOutput) barOutput.style.width = `${outputPct}%`;
 
       const effChip = document.getElementById('d-cache-eff-chip');
-      if (effChip) effChip.textContent = `${cachedPct}% Cached`;
+      if (effChip) effChip.textContent = `${cachedPct}% 已缓存`;
 
       document.getElementById('d-convoid').textContent = s.convo_id;
-      document.getElementById('d-path').textContent = s.workspace_path || 'Not attached to workspace';
+      document.getElementById('d-path').textContent = s.workspace_path || '未关联具体工作区';
 
       // Tool breakdown
       const toolBox = document.getElementById('d-tools');
@@ -5281,11 +5281,11 @@
 
       const toolBadge = document.getElementById('d-tools-badge');
       if (toolBadge) {
-        toolBadge.textContent = `${totalToolCalls.toLocaleString()} calls`;
+        toolBadge.textContent = `${totalToolCalls.toLocaleString()} 次调用`;
       }
 
       if (toolKeys.length === 0) {
-        toolBox.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">No tools recorded in this session</span>';
+        toolBox.innerHTML = '<span style="color:var(--text-muted); font-size:11px;">该会话无工具调用记录</span>';
       } else {
         toolKeys.forEach(k => {
           const pill = document.createElement('span');
@@ -5309,7 +5309,7 @@
         vscode.postMessage({ command: 'copyToClipboard', text, toast: toastMsg });
       } else if (navigator.clipboard) {
         navigator.clipboard.writeText(text);
-        showToast(toastMsg || 'Copied!');
+        showToast(toastMsg || '已复制到剪贴板！');
       }
     }
 
@@ -5320,34 +5320,34 @@
       const range = data.time_range || {};
       const dateRange = (range.start && range.end) ? `${range.start} to ${range.end}` : 'All Time';
 
-      let md = `### 🤖 Antigravity Usage Intelligence Report (${dateRange})
+      let md = `### 🤖 Antigravity 用量与配额分析报告 (${dateRange})
 
 `;
-      md += `* **Total Tokens Processed:** ${formatNumber(s.total_tokens)} (${s.total_tokens.toLocaleString()})
+      md += `* **处理总 Tokens:** ${formatNumber(s.total_tokens)} (${s.total_tokens.toLocaleString()})
 `;
-      md += `* **Prompt Cache Read:** ${formatNumber(s.total_cached_tokens)} (${s.cache_hit_rate_pct}% cache hit rate)
+      md += `* **提示词缓存读取:** ${formatNumber(s.total_cached_tokens)} (缓存命中率 ${s.cache_hit_rate_pct}%)
 `;
-      md += `* **Fresh Input:** ${formatNumber(s.total_input_tokens)} | **Output:** ${formatNumber(s.total_output_tokens)} (Thinking: ${formatNumber(s.total_thinking_tokens)})
+      md += `* **全新输入:** ${formatNumber(s.total_input_tokens)} | **模型输出:** ${formatNumber(s.total_output_tokens)} (思考推理: ${formatNumber(s.total_thinking_tokens)})
 `;
       if (c.dollars_saved != null) {
-        md += `* **💰 Dollar Savings via Context Cache:** **$${c.dollars_saved.toFixed(2)} saved** (${c.savings_pct}% discount on Gemini API spend)
+        md += `* **💰 上下文缓存节省金额:** **已节省 $${c.dollars_saved.toFixed(2)}** (基于官方费率节约 ${c.savings_pct}%)
 `;
       }
-      md += `* **Activity:** ${s.total_sessions} sessions across ${s.total_turns} agent turns
+      md += `* **活动总量:** 共 ${s.total_sessions} 次会话，${s.total_turns} 轮交互
 `;
       if (s.tool_success_rate_pct != null) {
-        md += `* **Tool Reliability:** ${s.tool_success_rate_pct}% success (${s.total_tool_calls.toLocaleString()} calls / ${s.total_tool_errors} retries)
+        md += `* **工具调用可靠性:** ${s.tool_success_rate_pct}% 成功率 (${s.total_tool_calls.toLocaleString()} 次调用 / ${s.total_tool_errors} 次重试)
 `;
       }
       md += `
-#### Top Projects
+#### 核心项目用量排行
 `;
       (data.projects || []).slice(0, 5).forEach((p, idx) => {
-        md += `${idx + 1}. **${p.name}**: ${formatNumber(p.total)} tokens (${p.sessions} sessions)
+        md += `${idx + 1}. **${p.name}**: ${formatNumber(p.total)} Tokens (${p.sessions} 次会话)
 `;
       });
       md += `
-*Generated by Antigravity Usage Intelligence*`;
+*由 Antigravity 用量与配额智能监控看板生成*`;
       return md;
     }
 
@@ -5394,14 +5394,20 @@
         end = formatDate(now);
       }
 
-      if (vscode) {
+      if (window.__STANDALONE_DATA__) {
+      showLoading(false);
+      renderUI(window.__STANDALONE_DATA__);
+    } else if (vscode) {
         vscode.postMessage({ command: 'fetchStats', start, end });
       }
     }
 
     function sendRangeRequestCustom(start, end) {
       showLoading(true);
-      if (vscode) {
+      if (window.__STANDALONE_DATA__) {
+      showLoading(false);
+      renderUI(window.__STANDALONE_DATA__);
+    } else if (vscode) {
         vscode.postMessage({ command: 'fetchStats', start, end });
       }
     }
@@ -5526,17 +5532,17 @@
 
     document.getElementById('d-btn-copy-md').addEventListener('click', () => {
       if (selectedSession) {
-        let md = `### 🤖 Antigravity Session: ${selectedSession.title}
+        let md = `### 🤖 Antigravity 会话明细: ${selectedSession.title}
 `;
         md += `- **ID:** \`${selectedSession.convo_id}\`
 `;
-        md += `- **Project:** ${selectedSession.project} | **Model:** ${selectedSession.model}
+        md += `- **项目:** ${selectedSession.project} | **模型:** ${selectedSession.model}
 `;
-        md += `- **Date:** ${selectedSession.created_at || selectedSession.date} (${formatDuration(selectedSession.duration_sec)})
+        md += `- **日期:** ${selectedSession.created_at || selectedSession.date} (耗时: ${formatDuration(selectedSession.duration_sec)})
 `;
-        md += `- **Total Tokens:** ${formatNumber(selectedSession.total_tokens)} (Input: ${formatNumber(selectedSession.input_tokens)}, Cached: ${formatNumber(selectedSession.cached_tokens)}, Output: ${formatNumber(selectedSession.output_tokens)})
+        md += `- **处理总 Tokens:** ${formatNumber(selectedSession.total_tokens)} (全新输入: ${formatNumber(selectedSession.input_tokens)}, 缓存读取: ${formatNumber(selectedSession.cached_tokens)}, 模型输出: ${formatNumber(selectedSession.output_tokens)})
 `;
-        copyText(md, 'Session markdown copied to clipboard!');
+        copyText(md, '会话 Markdown 报告已复制到剪贴板！');
       }
     });
 
@@ -5551,7 +5557,7 @@
         loadingTimeout = setTimeout(() => {
           if (el.style.display === 'flex') {
             el.style.display = 'none';
-            document.getElementById('error-message').textContent = 'Loading timed out after 15s. Verify Python is installed and Antigravity databases are accessible.';
+            document.getElementById('error-message').textContent = '数据加载超时 (15秒)。请检查是否安装 Python 且 Antigravity 数据库正常生成。';
             document.getElementById('error-banner').style.display = 'block';
           }
         }, 15000);
@@ -5565,7 +5571,7 @@
         document.getElementById('error-banner').style.display = 'none';
         renderUI(message.data);
         const freshnessEl = document.getElementById('data-freshness-note');
-        if (freshnessEl) freshnessEl.textContent = (message.data.is_demo ? 'DEMO sample data · ' : 'Tokens: exact local counts · ') + 'updated ' + new Date().toLocaleTimeString();
+        if (freshnessEl) freshnessEl.textContent = (message.data.is_demo ? 'DEMO sample data · ' : 'Token 用量：本地精确计量 · ') + 'updated ' + new Date().toLocaleTimeString();
 
         // Synchronize active filter button with active range on init (defaults to Today)
         if (message.defaultRange) {
@@ -5582,7 +5588,10 @@
       }
     });
 
-    if (vscode) {
+    if (window.__STANDALONE_DATA__) {
+      showLoading(false);
+      renderUI(window.__STANDALONE_DATA__);
+    } else if (vscode) {
       showLoading(true);
       const now = new Date();
       const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;

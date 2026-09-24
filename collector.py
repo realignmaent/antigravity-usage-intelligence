@@ -16,6 +16,12 @@ from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from contextlib import closing
 
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 CACHE_FILE = os.path.join(os.path.expanduser("~"), ".gemini", "antigravity", "antigravity_stats_cache.json")
 
 GEMINI_HOME = os.path.join(os.path.expanduser("~"), ".gemini")
@@ -82,10 +88,34 @@ MODEL_MAP = {
     1016: "Gemini Pro Agent",
 }
 
-# Pricing per 1M tokens (Standard Gemini Flash reference model)
-RATE_INPUT = 0.10
-RATE_CACHE = 0.025
-RATE_OUTPUT = 0.40
+# ==============================================================================
+# 官方标准 API 阶梯费率矩阵 (美元 / 1M Tokens)
+# 基于 Google Cloud / Google AI Studio 及 Anthropic 官方公布标准
+# ==============================================================================
+MODEL_PRICING_TABLE = {
+    # Gemini Flash 系列 (极速高效)
+    "Gemini 3.8 Flash": {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+    "Gemini 3.7 Flash": {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+    "Gemini 3.6 Flash": {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+    "Gemini 3.5 Flash": {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+    "Gemini 3 Flash":   {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+
+    # Gemini Pro 系列 (高复杂度推理)
+    "Gemini 3.1 Pro":   {"input": 1.25,  "cache_read": 0.3125,  "output": 5.00},
+    "Gemini Pro Agent": {"input": 1.25,  "cache_read": 0.3125,  "output": 5.00},
+
+    # Claude 4.x / 3.7 / 3.5 系列
+    "Claude Sonnet 4.6": {"input": 3.00,  "cache_read": 0.30,   "output": 15.00},
+    "Claude Sonnet 3.7": {"input": 3.00,  "cache_read": 0.30,   "output": 15.00},
+    "Claude Sonnet 3.5": {"input": 3.00,  "cache_read": 0.30,   "output": 15.00},
+    "Claude Opus 4.6":   {"input": 15.00, "cache_read": 1.50,   "output": 75.00},
+    "Claude Opus 3":     {"input": 15.00, "cache_read": 1.50,   "output": 75.00},
+    "Claude Haiku 4.5":  {"input": 0.80,  "cache_read": 0.08,   "output": 4.00},
+    "Claude Haiku 3.5":  {"input": 0.80,  "cache_read": 0.08,   "output": 4.00},
+
+    # 兜底默认值
+    "default":           {"input": 0.075, "cache_read": 0.01875, "output": 0.30},
+}
 
 def parse_proto(data):
     """Fast protobuf wire format parser with boundary guards"""
@@ -472,14 +502,32 @@ def generate_analytics(sessions, start_date=None, end_date=None):
     total_tokens = total_input + total_cached + total_output
     total_turns = sum(s.get("turn_count", 0) for s in filtered_sessions)
     
-    # Cost & Savings Calculation
-    est_spend = (total_input * RATE_INPUT + total_cached * RATE_CACHE + total_output * RATE_OUTPUT) / 1_000_000
-    cost_without_cache = ((total_input + total_cached) * RATE_INPUT + total_output * RATE_OUTPUT) / 1_000_000
+    # 精确多模型成本与节省计算 (基于各模型官方标准定价)
+    total_est_spend = 0.0
+    total_cost_no_cache = 0.0
+
+    for s in filtered_sessions:
+        m_name = s.get("model", "Gemini 3.8 Flash")
+        rate = MODEL_PRICING_TABLE.get(m_name, MODEL_PRICING_TABLE["default"])
+        s_inp = s.get("input_tokens", 0)
+        s_cached = s.get("cached_tokens", 0)
+        s_out = s.get("output_tokens", 0)
+
+        s_cost = (s_inp * rate["input"] + s_cached * rate["cache_read"] + s_out * rate["output"]) / 1_000_000
+        s_cost_no_cache = ((s_inp + s_cached) * rate["input"] + s_out * rate["output"]) / 1_000_000
+        s["cost"] = round(s_cost, 4)
+        s["cost_without_cache"] = round(s_cost_no_cache, 4)
+
+        total_est_spend += s_cost
+        total_cost_no_cache += s_cost_no_cache
+
+    est_spend = total_est_spend
+    cost_without_cache = total_cost_no_cache
     dollars_saved = max(0.0, cost_without_cache - est_spend)
     savings_pct = (dollars_saved / cost_without_cache * 100) if cost_without_cache > 0 else 0.0
 
     # Daily aggregation
-    daily = defaultdict(lambda: {"input": 0, "cached": 0, "output": 0, "thinking": 0, "total": 0, "sessions": 0, "turns": 0})
+    daily = defaultdict(lambda: {"input": 0, "cached": 0, "output": 0, "thinking": 0, "total": 0, "sessions": 0, "turns": 0, "cost": 0.0})
     for s in filtered_sessions:
         d = s["date"]
         daily[d]["input"] += s.get("input_tokens", 0)
@@ -489,18 +537,25 @@ def generate_analytics(sessions, start_date=None, end_date=None):
         daily[d]["total"] += s.get("total_tokens", 0)
         daily[d]["sessions"] += 1
         daily[d]["turns"] += s.get("turn_count", 0)
+        daily[d]["cost"] = round(daily[d]["cost"] + s.get("cost", 0.0), 2)
         
-    # Hourly Flow Distribution (24 hours)
-    hourly = [{"hour": h, "sessions": 0, "turns": 0, "tokens": 0} for h in range(24)]
+    # Hourly Flow Distribution (严格按本地时区 24 小时分布)
+    hourly = [{"hour": h, "sessions": 0, "turns": 0, "tokens": 0, "cost": 0.0} for h in range(24)]
     for s in filtered_sessions:
         created_at = s.get("created_at", "")
-        if created_at and len(created_at) >= 13:
+        if created_at:
             try:
-                hr = int(created_at[11:13])
+                if "T" in created_at:
+                    dt = datetime.fromisoformat(created_at.replace("Z", "+00:00")).astimezone()
+                    hr = dt.hour
+                else:
+                    dt = datetime.strptime(created_at, '%Y-%m-%d %H:%M:%S')
+                    hr = dt.hour
                 if 0 <= hr < 24:
                     hourly[hr]["sessions"] += 1
                     hourly[hr]["turns"] += s.get("turn_count", 0)
                     hourly[hr]["tokens"] += s.get("total_tokens", 0)
+                    hourly[hr]["cost"] = round(hourly[hr]["cost"] + s.get("cost", 0.0), 4)
             except Exception:
                 pass
 
@@ -549,8 +604,11 @@ def generate_analytics(sessions, start_date=None, end_date=None):
         models[m]["total"] += s.get("total_tokens", 0)
         models[m]["sessions"] += 1
 
-    models_list = sorted([
-        {
+    models_list = []
+    for k, v in models.items():
+        rate = MODEL_PRICING_TABLE.get(k, MODEL_PRICING_TABLE["default"])
+        m_cost = (v["input"] * rate["input"] + v["cached"] * rate["cache_read"] + v["output"] * rate["output"]) / 1_000_000
+        models_list.append({
             "name": k,
             "total": v["total"],
             "input": v["input"],
@@ -558,10 +616,10 @@ def generate_analytics(sessions, start_date=None, end_date=None):
             "output": v["output"],
             "thinking": v["thinking"],
             "sessions": v["sessions"],
+            "cost": round(m_cost, 2),
             "share_pct": round((v["total"] / total_tokens * 100) if total_tokens > 0 else 0, 1)
-        }
-        for k, v in models.items()
-    ], key=lambda x: x["total"], reverse=True)
+        })
+    models_list.sort(key=lambda x: x["total"], reverse=True)
 
     # Surface breakdown
     surfaces = defaultdict(lambda: {"total": 0, "sessions": 0, "input": 0, "cached": 0, "output": 0})
@@ -756,7 +814,8 @@ def generate_analytics(sessions, start_date=None, end_date=None):
                     "thinking_tokens": s.get("thinking_tokens", 0),
                     "tool_counts": s.get("tool_counts", {}),
                     "tool_errors": s.get("tool_errors", 0),
-                    "model": s["model"]
+                    "model": s["model"],
+                    "cost": s.get("cost", 0.0)
                 }
                 for s in filtered_sessions
             ],
@@ -764,6 +823,49 @@ def generate_analytics(sessions, start_date=None, end_date=None):
             reverse=True
         )[:50]
     }
+
+def export_standalone_html(data, output_path):
+    """导出零依赖的独立 HTML 仪表盘，无需 VS Code 直接在浏览器中打开"""
+    html_template_path = os.path.join(os.path.dirname(__file__), "src", "ui", "dashboard.html")
+    if not os.path.exists(html_template_path):
+        print(f"[错误] 未找到模板文件: {html_template_path}")
+        return
+    with open(html_template_path, 'r', encoding='utf-8') as f:
+        template = f.read()
+    
+    payload_js = f"<script>window.__STANDALONE_DATA__ = {json.dumps(data, ensure_ascii=False)};</script>\n"
+    rendered = template.replace("<head>", f"<head>\n  {payload_js}")
+    
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(rendered)
+    print(f"[成功] 独立中文监控大屏已导出至: {output_path}")
+
+def serve_dashboard(data, port=9090):
+    """在本地端口启动轻量 Web 服务，实时查看 Antigravity 用量大屏"""
+    import http.server
+    import socketserver
+    import webbrowser
+    import tempfile
+    
+    tmp_dir = tempfile.mkdtemp()
+    index_path = os.path.join(tmp_dir, "index.html")
+    export_standalone_html(data, index_path)
+    
+    current_cwd = os.getcwd()
+    try:
+        os.chdir(tmp_dir)
+        Handler = http.server.SimpleHTTPRequestHandler
+        with socketserver.TCPServer(("", port), Handler) as httpd:
+            url = f"http://localhost:{port}"
+            print(f"[服务已启动] 请在浏览器中查看 Antigravity 用量大屏: {url}")
+            print("按 Ctrl+C 停止服务...")
+            webbrowser.open(url)
+            httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n[服务已停止]")
+    finally:
+        os.chdir(current_cwd)
 
 def build_demo_sessions():
     """Deterministic sample ledger for screenshots, UI testing, and first-run preview.
@@ -817,34 +919,42 @@ if __name__ == "__main__":
     else:
         sessions = sync_all_sessions(force=force_sync)
     
-    # Check arguments
-    if "--json" in sys.argv:
-        start_date = None
-        end_date = None
-        for i, arg in enumerate(sys.argv):
-            if arg == "--start" and i + 1 < len(sys.argv):
-                start_date = sys.argv[i + 1]
-            if arg == "--end" and i + 1 < len(sys.argv):
-                end_date = sys.argv[i + 1]
-        data = generate_analytics(sessions, start_date, end_date)
+    start_date = None
+    end_date = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--start" and i + 1 < len(sys.argv):
+            start_date = sys.argv[i + 1]
+        if arg == "--end" and i + 1 < len(sys.argv):
+            end_date = sys.argv[i + 1]
+            
+    data = generate_analytics(sessions, start_date, end_date)
+    
+    if "--export-html" in sys.argv:
+        idx = sys.argv.index("--export-html")
+        out_path = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else "antigravity_dashboard.html"
+        export_standalone_html(data, out_path)
+    elif "--serve" in sys.argv:
+        idx = sys.argv.index("--serve")
+        port = int(sys.argv[idx + 1]) if (idx + 1 < len(sys.argv) and sys.argv[idx + 1].isdigit()) else 9090
+        serve_dashboard(data, port)
+    elif "--json" in sys.argv:
         print(json.dumps(data))
     else:
-        data = generate_analytics(sessions)
         s = data["summary"]
         c = data["costs"]
         st = data["streaks"]
         print("==================================================")
-        print("      ANTIGRAVITY USAGE INTELLIGENCE REPORT      ")
+        print("      ANTIGRAVITY 用量与官方计费智能分析报告      ")
         print("==================================================")
-        print(f"Total Sessions:         {s['total_sessions']}")
-        print(f"Total Agent Turns:      {s['total_turns']:,}")
-        print(f"Non-Cached Input:       {s['total_input_tokens']:,}")
-        print(f"Cached Input (Read):    {s['total_cached_tokens']:,}")
-        print(f"Output Tokens:          {s['total_output_tokens']:,} (incl. Thinking: {s['total_thinking_tokens']:,})")
-        print(f"Total Processed Tokens: {s['total_tokens']:,}")
-        print(f"Cache Savings Ratio:    {s['cache_hit_rate_pct']}%")
-        print(f"Estimated Spend:        ${c['est_spend']:.2f} (Without Cache: ${c['cost_without_cache']:.2f})")
-        print(f"Dollars Saved by Cache: ${c['dollars_saved']:.2f} ({c['savings_pct']}% saved)")
-        print(f"Coding Streak:          {st['current_streak']} days active (Best: {st['longest_streak']} days)")
-        print(f"Tool Reliability:       {s['tool_success_rate_pct']}% ({s['total_tool_calls']:,} calls / {s['total_tool_errors']} retries)")
+        print(f"总会话数:               {s['total_sessions']} 次会话")
+        print(f"Agent 对话轮次:         {s['total_turns']:,} 轮")
+        print(f"全新输入 Tokens:        {s['total_input_tokens']:,}")
+        print(f"缓存读取 (Cache Read):  {s['total_cached_tokens']:,}")
+        print(f"模型输出 Tokens:        {s['total_output_tokens']:,} (含深度思考: {s['total_thinking_tokens']:,})")
+        print(f"总处理 Token 规模:      {s['total_tokens']:,}")
+        print(f"上下文缓存节省率:       {s['cache_hit_rate_pct']}%")
+        print(f"官方等价估算费用:       ${c['est_spend']:.2f} (若无缓存原价: ${c['cost_without_cache']:.2f})")
+        print(f"缓存累计节省金额:       ${c['dollars_saved']:.2f} (立省 {c['savings_pct']}%)")
+        print(f"连续编码活跃天数:       {st['current_streak']} 天 (历史最佳: {st['longest_streak']} 天)")
+        print(f"工具调用可靠性:         {s['tool_success_rate_pct']}% ({s['total_tool_calls']:,} 次调用 / {s['total_tool_errors']} 次重试)")
         print("==================================================")

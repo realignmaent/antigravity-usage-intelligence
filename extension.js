@@ -45,10 +45,10 @@ function maybeQuotaAlert(liveQuota) {
     }
     if (top !== null) {
       vscode.window.showWarningMessage(
-        `Antigravity quota: ${f.label} at ${q.used_pct}% used (crossed ${top}%; ${liveQuota.tier_name || 'current plan'}).`,
-        'Open Dashboard'
+        `Antigravity 配额预警: ${f.label} 已使用 ${q.used_pct}% (已跨越 ${top}% 阈值; ${liveQuota.tier_name || '当前方案'})。`,
+        '打开仪表盘'
       ).then((sel) => {
-        if (sel === 'Open Dashboard') vscode.commands.executeCommand('antigravity-stats.openDashboard');
+        if (sel === '打开仪表盘' || sel === 'Open Dashboard') vscode.commands.executeCommand('antigravity-stats.openDashboard');
       });
     }
   }
@@ -195,9 +195,9 @@ async function fetchStatsData(args = []) {
           }
         }
       }
-      throw new Error(`Python interpreter not found. Please set "antigravity-stats.pythonPath" in settings.`);
+      throw new Error(`未找到 Python 解释器。请在设置中配置 "antigravity-stats.pythonPath"。`);
     }
-    throw new Error(`Collector error: ${err.stderr || err.message}`);
+    throw new Error(`统计采集器异常: ${err.stderr || err.message}`);
   }
 }
 
@@ -208,17 +208,17 @@ async function updateStatusBar() {
     const data = await fetchStatsData(['--start', today, '--end', today]);
     const tokens = data.summary.total_tokens;
     if (data.summary.total_sessions === 0) {
-      statusBarItem.text = `$(graph) AI: no data`;
-      statusBarItem.tooltip = `No Antigravity sessions found yet. Use Antigravity for a task, then Refresh. Looking in ~/.gemini/antigravity*/conversations. Click to open dashboard.`;
+      statusBarItem.text = `$(graph) AI: 暂无数据`;
+      statusBarItem.tooltip = `未找到 Antigravity 会话记录。请在执行任务后刷新。扫描路径: ~/.gemini/antigravity*/conversations。点击打开仪表盘。`;
       statusBarItem.show();
       return;
     }
-    statusBarItem.text = `$(graph) AI: ${formatCompact(tokens)} today`;
-    statusBarItem.tooltip = `Antigravity Usage Today: ${tokens.toLocaleString()} tokens across ${data.summary.total_sessions} sessions (${data.summary.cache_hit_rate_pct}% cached). Click to open dashboard.`;
+    statusBarItem.text = `$(graph) AI: 今日 ${formatCompact(tokens)}`;
+    statusBarItem.tooltip = `Antigravity 今日用量: ${tokens.toLocaleString()} Tokens，共 ${data.summary.total_sessions} 次会话 (缓存命中率 ${data.summary.cache_hit_rate_pct}%)。点击打开仪表盘。`;
     statusBarItem.show();
   } catch (err) {
-    statusBarItem.text = `$(graph) AI Stats`;
-    statusBarItem.tooltip = `Antigravity Stats error: ${err.message}`;
+    statusBarItem.text = `$(graph) AI 统计`;
+    statusBarItem.tooltip = `Antigravity 统计错误: ${err.message}`;
     statusBarItem.show();
   }
 }
@@ -275,7 +275,7 @@ async function handleWebviewMessage(webview, message) {
         break;
       }
       case 'rebuild': {
-        vscode.window.showInformationMessage('Rebuilding Antigravity token cache from disk...');
+        vscode.window.showInformationMessage('正在从磁盘全量重建 Antigravity Token 历史缓存...');
         const [data, liveQuota] = await Promise.all([
           fetchStatsData(['--force']),
           getLiveQuota(true).catch(() => null)
@@ -284,7 +284,7 @@ async function handleWebviewMessage(webview, message) {
         maybeQuotaAlert(liveQuota);
         webview.postMessage({ command: 'loadStats', data });
         updateStatusBar();
-        vscode.window.showInformationMessage('Antigravity token cache rebuild complete.');
+        vscode.window.showInformationMessage('Antigravity Token 缓存重建完成。');
         break;
       }
       case 'openFullDashboard': {
@@ -301,7 +301,7 @@ async function handleWebviewMessage(webview, message) {
       }
       case 'exportCSV': {
         const sessions = (message.data && message.data.recent_sessions) ? message.data.recent_sessions : [];
-        let csv = 'Date,Session ID,Project,Model,Turns,Duration (sec),Input Tokens,Cached Tokens,Output Tokens,Thinking Tokens,Total Tokens,Prompt Title\n';
+        let csv = '日期,会话ID,项目,模型,交互轮次,耗时(秒),全新输入Tokens,上下文缓存Tokens,生成输出Tokens,思考推理Tokens,处理总Tokens,提示词主题\n';
         sessions.forEach(s => {
           const cleanTitle = (s.title || '').replace(/"/g, '""');
           csv += `"${s.date}","${s.convo_id}","${s.project || 'General'}","${s.model}","${s.turn_count}","${s.duration_sec}","${s.input_tokens}","${s.cached_tokens}","${s.output_tokens}","${s.thinking_tokens || 0}","${s.total_tokens}","${cleanTitle}"\n`;
@@ -331,7 +331,7 @@ async function handleWebviewMessage(webview, message) {
       }
     }
   } catch (err) {
-    vscode.window.showErrorMessage(`Antigravity Stats: ${err.message}`);
+    vscode.window.showErrorMessage(`Antigravity 统计异常: ${err.message}`);
     webview.postMessage({ command: 'error', message: err.message });
   }
 }
@@ -423,7 +423,7 @@ function activate(context) {
 
       fullPanel = vscode.window.createWebviewPanel(
         'antigravityStatsFull',
-        'Antigravity Usage Intelligence',
+        'Antigravity 用量与配额智能监控',
         vscode.ViewColumn.One,
         {
           enableScripts: true,
@@ -448,25 +448,25 @@ function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('antigravity-stats.refresh', () => {
       if (statsProvider) statsProvider.refresh();
-      vscode.window.showInformationMessage('Antigravity Stats refreshed.');
+      vscode.window.showInformationMessage('Antigravity 用量数据已刷新。');
     })
   );
 
   // 4. Register Rebuild Cache Command
   context.subscriptions.push(
     vscode.commands.registerCommand('antigravity-stats.rebuildCache', async () => {
-      const progressOptions = { location: vscode.ProgressLocation.Notification, title: 'Rebuilding Antigravity stats...', cancellable: false };
+      const progressOptions = { location: vscode.ProgressLocation.Notification, title: '正在全量重建 Antigravity 历史统计...', cancellable: false };
       vscode.window.withProgress(progressOptions, async () => {
         try {
           const rebuildData = await fetchStatsData(['--force']);
           if (statsProvider) statsProvider.pushStats(rebuildData);
-          vscode.window.showInformationMessage('Antigravity Stats: cache rebuild complete.');
+          vscode.window.showInformationMessage('Antigravity 统计: 历史缓存全量重建完毕。');
         } catch (err) {
           // Silently log to status bar tooltip instead of scary red popup
           if (statusBarItem) {
-            statusBarItem.tooltip = `Antigravity Stats rebuild failed: ${err.message}. Click to open dashboard.`;
+            statusBarItem.tooltip = `Antigravity 统计重建失败: ${err.message}。点击打开仪表盘。`;
           }
-          vscode.window.showWarningMessage(`Antigravity Stats: rebuild issue — ${err.message.slice(0, 120)}`);
+          vscode.window.showWarningMessage(`Antigravity 统计: 重建警告 — ${err.message.slice(0, 120)}`);
         }
       });
     })

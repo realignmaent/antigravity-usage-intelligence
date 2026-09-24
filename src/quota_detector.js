@@ -228,9 +228,12 @@ function parseQuotaFromStatus(status) {
   return result;
 }
 
+let lastScanTime = 0;
+const SCAN_COOLDOWN_MS = 45000; // 45s cooldown after failed scan to eliminate Windows CPU spikes
+
 async function getLiveQuota(forceRefresh = false) {
   const now = Date.now();
-  if (!forceRefresh && cachedQuota && (now - lastQueryTime < 15000)) {
+  if (!forceRefresh && cachedQuota && (now - lastQueryTime < 30000)) {
     return cachedQuota;
   }
 
@@ -245,7 +248,16 @@ async function getLiveQuota(forceRefresh = false) {
     cachedConn = null;
   }
 
-  // 2. Scan for language server
+  // 2. Scan for language server with cooldown
+  if (!forceRefresh && (now - lastScanTime < SCAN_COOLDOWN_MS)) {
+    if (cachedQuota) {
+      cachedQuota.stale = true;
+      return cachedQuota;
+    }
+    return null;
+  }
+
+  lastScanTime = now;
   try {
     const conn = await scanForLanguageServer();
     if (conn) {
