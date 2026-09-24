@@ -5394,20 +5394,52 @@
         end = formatDate(now);
       }
 
-      if (window.__STANDALONE_DATA__) {
-      showLoading(false);
-      renderUI(window.__STANDALONE_DATA__);
-    } else if (vscode) {
+      if (!vscode && window.location && window.location.protocol.startsWith('http')) {
+        let url = '/api/stats';
+        const params = [];
+        if (start) params.push(`start=${encodeURIComponent(start)}`);
+        if (end) params.push(`end=${encodeURIComponent(end)}`);
+        if (params.length) url += '?' + params.join('&');
+        fetch(url)
+          .then(res => res.json())
+          .then(d => {
+            showLoading(false);
+            renderUI(d);
+          })
+          .catch(() => {
+            showLoading(false);
+            if (window.__STANDALONE_DATA__) renderUI(window.__STANDALONE_DATA__);
+          });
+      } else if (window.__STANDALONE_DATA__) {
+        showLoading(false);
+        renderUI(window.__STANDALONE_DATA__);
+      } else if (vscode) {
         vscode.postMessage({ command: 'fetchStats', start, end });
       }
     }
 
     function sendRangeRequestCustom(start, end) {
       showLoading(true);
-      if (window.__STANDALONE_DATA__) {
-      showLoading(false);
-      renderUI(window.__STANDALONE_DATA__);
-    } else if (vscode) {
+      if (!vscode && window.location && window.location.protocol.startsWith('http')) {
+        let url = '/api/stats';
+        const params = [];
+        if (start) params.push(`start=${encodeURIComponent(start)}`);
+        if (end) params.push(`end=${encodeURIComponent(end)}`);
+        if (params.length) url += '?' + params.join('&');
+        fetch(url)
+          .then(res => res.json())
+          .then(d => {
+            showLoading(false);
+            renderUI(d);
+          })
+          .catch(() => {
+            showLoading(false);
+            if (window.__STANDALONE_DATA__) renderUI(window.__STANDALONE_DATA__);
+          });
+      } else if (window.__STANDALONE_DATA__) {
+        showLoading(false);
+        renderUI(window.__STANDALONE_DATA__);
+      } else if (vscode) {
         vscode.postMessage({ command: 'fetchStats', start, end });
       }
     }
@@ -5482,23 +5514,56 @@
 
     document.getElementById('btn-refresh').addEventListener('click', () => {
       showLoading(true);
-      if (vscode) vscode.postMessage({ command: 'refresh' });
+      if (vscode) {
+        vscode.postMessage({ command: 'refresh' });
+      } else if (window.location && window.location.protocol.startsWith('http')) {
+        location.reload();
+      } else {
+        showLoading(false);
+        showToast('离线单文件版已是最新快照');
+      }
     });
 
     document.getElementById('btn-rebuild').addEventListener('click', () => {
       showLoading(true);
-      if (vscode) vscode.postMessage({ command: 'rebuild' });
+      if (vscode) {
+        vscode.postMessage({ command: 'rebuild' });
+      } else if (window.location && window.location.protocol.startsWith('http')) {
+        location.reload();
+      }
     });
 
     document.getElementById('btn-export').addEventListener('click', () => {
-      if (currentData && vscode) {
-        vscode.postMessage({ command: 'exportJSON', data: currentData });
+      if (currentData) {
+        if (vscode) {
+          vscode.postMessage({ command: 'exportJSON', data: currentData });
+        } else {
+          const blob = new Blob([JSON.stringify(currentData, null, 2)], { type: 'application/json' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `antigravity_stats_${new Date().toISOString().slice(0, 10)}.json`;
+          a.click();
+        }
       }
     });
 
     document.getElementById('btn-export-csv').addEventListener('click', () => {
-      if (currentData && vscode) {
-        vscode.postMessage({ command: 'exportCSV', data: currentData });
+      if (currentData) {
+        if (vscode) {
+          vscode.postMessage({ command: 'exportCSV', data: currentData });
+        } else {
+          const sessions = (currentData && currentData.recent_sessions) ? currentData.recent_sessions : [];
+          let csv = '日期,会话ID,项目,模型,交互轮次,耗时(秒),全新输入Tokens,上下文缓存Tokens,生成输出Tokens,思考推理Tokens,处理总Tokens,提示词主题\n';
+          sessions.forEach(s => {
+            const cleanTitle = (s.title || '').replace(/"/g, '""');
+            csv += `"${s.date}","${s.convo_id}","${s.project || 'General'}","${s.model}","${s.turn_count}","${s.duration_sec}","${s.input_tokens}","${s.cached_tokens}","${s.output_tokens}","${s.thinking_tokens || 0}","${s.total_tokens}","${cleanTitle}"\n`;
+          });
+          const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `antigravity_sessions_${new Date().toISOString().slice(0, 10)}.csv`;
+          a.click();
+        }
       }
     });
 
@@ -5506,6 +5571,7 @@
       document.getElementById('error-banner').style.display = 'none';
       showLoading(true);
       if (vscode) vscode.postMessage({ command: 'refresh' });
+      else location.reload();
     });
 
     // Drawer Event Listeners

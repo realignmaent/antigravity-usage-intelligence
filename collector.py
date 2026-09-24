@@ -846,26 +846,63 @@ def serve_dashboard(data, port=9090):
     import http.server
     import socketserver
     import webbrowser
-    import tempfile
+    from urllib.parse import urlparse, parse_qs
+
+    html_template_path = os.path.join(os.path.dirname(__file__), "src", "ui", "dashboard.html")
     
-    tmp_dir = tempfile.mkdtemp()
-    index_path = os.path.join(tmp_dir, "index.html")
-    export_standalone_html(data, index_path)
-    
-    current_cwd = os.getcwd()
+    class AntigravityWebHandler(http.server.BaseHTTPRequestHandler):
+        def log_message(self, format, *args):
+            pass  # 静默访问日志，保持控制台清爽
+
+        def do_GET(self):
+            parsed = urlparse(self.path)
+            if parsed.path in ["", "/"]:
+                try:
+                    fresh_sessions = sync_all_sessions(force=False)
+                    fresh_data = generate_analytics(fresh_sessions)
+                except Exception:
+                    fresh_data = data
+                
+                with open(html_template_path, 'r', encoding='utf-8') as f:
+                    template = f.read()
+                payload_js = f"<script>window.__STANDALONE_DATA__ = {json.dumps(fresh_data, ensure_ascii=False)};</script>\n"
+                rendered = template.replace("<head>", f"<head>\n  {payload_js}")
+                encoded = rendered.encode('utf-8')
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(encoded)))
+                self.end_headers()
+                self.wfile.write(encoded)
+            elif parsed.path == "/api/stats":
+                qs = parse_qs(parsed.query)
+                s_date = qs.get("start", [None])[0]
+                e_date = qs.get("end", [None])[0]
+                try:
+                    fresh_sessions = sync_all_sessions(force=False)
+                    api_data = generate_analytics(fresh_sessions, s_date, e_date)
+                except Exception as e:
+                    api_data = {"error": str(e)}
+                encoded = json.dumps(api_data, ensure_ascii=False).encode('utf-8')
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(encoded)))
+                self.end_headers()
+                self.wfile.write(encoded)
+            else:
+                self.send_error(404, "Not Found")
+
+    class ReusableTCPServer(socketserver.TCPServer):
+        allow_reuse_address = True
+
     try:
-        os.chdir(tmp_dir)
-        Handler = http.server.SimpleHTTPRequestHandler
-        with socketserver.TCPServer(("", port), Handler) as httpd:
+        with ReusableTCPServer(("", port), AntigravityWebHandler) as httpd:
             url = f"http://localhost:{port}"
-            print(f"[服务已启动] 请在浏览器中查看 Antigravity 用量大屏: {url}")
-            print("按 Ctrl+C 停止服务...")
+            print(f"[服务已成功启动] Antigravity 中文智能大屏已就绪: {url}")
+            print("正在为您打开浏览器...")
             webbrowser.open(url)
             httpd.serve_forever()
     except KeyboardInterrupt:
         print("\n[服务已停止]")
-    finally:
-        os.chdir(current_cwd)
 
 def build_demo_sessions():
     """Deterministic sample ledger for screenshots, UI testing, and first-run preview.
